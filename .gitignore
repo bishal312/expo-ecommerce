@@ -1,0 +1,79 @@
+# ==========================================
+# Dependencies (Any nested folder)
+# ==========================================
+**/node_modules/
+**/node_modules
+.pnpm-store/
+.yarn/cache/
+.yarn/unplugged/
+
+# ==========================================
+# Environment & Secrets (Any nested folder)
+# ==========================================
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.template
+
+# ==========================================
+# Build & Output Folders (Any nested folder)
+# ==========================================
+**/dist/
+**/build/
+**/out/
+**/.next/
+**/.expo/
+**/.output/
+**/.turbo/
+
+# ==========================================
+# Logs & Process Manager Files
+# ==========================================
+**/logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pnpm-debug.log*
+
+# ==========================================
+# OS & Editor Specific
+# ==========================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+
+# IDEs & Editors
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ==========================================
+# Testing & Coverage
+# ==========================================
+**/coverage/
+.nyc_output/
+
+# ==========================================
+# Local Database & Temporary Files
+# ==========================================
+*.sqlite
+*.sqlite-journal
+*.db
+.cache/
