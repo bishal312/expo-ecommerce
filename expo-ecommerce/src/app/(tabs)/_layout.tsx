@@ -22,6 +22,12 @@ export default function TabsLayout() {
                         case "account":
                             iconName = "person";
                             break;
+                        case "orders":
+                            iconName = "bag-outline";
+                            break;
+                        case "admin":
+                            iconName = "person-outline";
+                            break;
                     }
 
                     return (
@@ -45,6 +51,14 @@ export default function TabsLayout() {
             <Tabs.Screen
                 name="account"
                 options={{ title: "Account" }}
+            />
+            <Tabs.Screen
+                name="orders"
+                options={{ title: "Orders", href: null }}
+            />
+            <Tabs.Screen
+                name="admin"
+                options={{ title: "Admin", href: null }}
             />
         </Tabs>
     );
