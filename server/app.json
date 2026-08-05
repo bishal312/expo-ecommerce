@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "2eb2c309-e44a-4bd9-a9a7-77892d8209aa"
+      }
+    },
+    "android": {
+      "package": "com.bsal07.server"
+    },
+    "ios": {
+      "bundleIdentifier": "com.bsal07.server",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    }
+  }
+}
