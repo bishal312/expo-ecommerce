@@ -1,5 +1,5 @@
 import { Tabs } from "expo-router";
-import { Ionicons } from "@expo/vector-icons"
+import { Ionicons } from "@expo/vector-icons";
 
 export default function TabsLayout() {
     return (
@@ -10,20 +10,42 @@ export default function TabsLayout() {
                 tabBarInactiveTintColor: "gray",
                 // tabBarShowLabel: false,
                 tabBarIcon: ({ color, size }) => {
-                    let iconName: keyof typeof Ionicons.glyphMap;
+                    let iconName: keyof typeof Ionicons.glyphMap = "home";
 
-                    if (route.name === "home") iconName = "home";
-                    else if (route.name === "cart") iconName = "cart";
-                    else if (route.name === "account") iconName = "person";
-                    else iconName = "home";
+                    switch (route.name) {
+                        case "home":
+                            iconName = "home";
+                            break;
+                        case "cart":
+                            iconName = "cart";
+                            break;
+                        case "account":
+                            iconName = "person";
+                            break;
+                    }
 
-                    return <Ionicons name={iconName} size={size}
-                        color={color} />;
-                }
-            })}>
-            <Tabs.Screen name="home" options={{ title: "Home" }} />
-            <Tabs.Screen name="cart" options={{ title: "Cart" }} />
-            <Tabs.Screen name="account" options={{ title: "Account" }} />
+                    return (
+                        <Ionicons
+                            name={iconName}
+                            size={size}
+                            color={color}
+                        />
+                    );
+                },
+            })}
+        >
+            <Tabs.Screen
+                name="home"
+                options={{ title: "Home" }}
+            />
+            <Tabs.Screen
+                name="cart"
+                options={{ title: "Cart" }}
+            />
+            <Tabs.Screen
+                name="account"
+                options={{ title: "Account" }}
+            />
         </Tabs>
-    )
+    );
 }

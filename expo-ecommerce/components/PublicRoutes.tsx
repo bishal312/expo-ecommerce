@@ -6,9 +6,9 @@ type Props = {
     children: ReactNode;
 };
 
-export default function ProtectedRoutes({ isLoggedIn, children }: Props) {
-    if (!isLoggedIn) {
-        return <Redirect href={'/login'} />
+export default function PublicRoutes({ isLoggedIn, children }: Props) {
+    if (isLoggedIn) {
+        return <Redirect href={'/(tabs)/home'} />
     }
 
     return <>{children}</>

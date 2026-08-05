@@ -1,7 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { AppContextType, User } from "../types";
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import Toast from "react-native-toast-message"
 
 const server = "http://localhost:5000";
 
@@ -11,6 +12,9 @@ const defaultContext: AppContextType = {
     authLoading: true,
     btnLoading: false,
     token: null,
+    loginUser: async () => { },
+    registerUser: async () => { },
+    logoutUser: async () => { },
 };
 
 const AppContext = createContext<AppContextType>
@@ -23,6 +27,91 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     const [btnLoading, setBtnLoading] = useState(false);
     const [token, setToken] = useState<string | null>(null);
 
+    const registerUser = async (
+        name: string,
+        email: string,
+        password: string,
+        setName: any,
+        setEmail: any,
+        setPassword: any,
+        router: any,
+    ) => {
+        setBtnLoading(true);
+        try {
+            const { data } = await axios.post(`${server}/api/user/register`, {
+                name,
+                email,
+                password,
+            });
+
+            await AsyncStorage.setItem("token", data.token);
+            setToken(data.token);
+            setisAuth(true);
+            setUser(data.user);
+            Toast.show({ type: "success", text1: data.message });
+            setEmail("");
+            setPassword("");
+            setName("");
+            router.replace("/(tabs)/home");
+
+        } catch (error) {
+            const err = error as AxiosError<{ message: string }>;
+
+            Toast.show({
+                type: "error",
+                text1: err.response?.data?.message ?? "Failed to register",
+            });
+
+            console.log(err);
+        } finally {
+            setBtnLoading(false);
+        }
+    };
+
+    const loginUser = async (
+        email: string,
+        password: string,
+        setEmail: any,
+        setPassword: any,
+        router: any,
+    ) => {
+        setBtnLoading(true);
+        try {
+            const { data } = await axios.post(`${server}/api/user/login`, {
+                email,
+                password,
+            });
+
+            await AsyncStorage.setItem("token", data.token);
+            setToken(data.token);
+            setisAuth(true);
+            setUser(data.user);
+            Toast.show({ type: "success", text1: data.message });
+            setEmail("");
+            setPassword("");
+            router.replace("/(tabs)/home");
+
+        } catch (error) {
+            const err = error as AxiosError<{ message: string }>;
+
+            Toast.show({
+                type: "error",
+                text1: err.response?.data?.message ?? "Failed to login",
+            });
+
+            console.log(err);
+        } finally {
+            setBtnLoading(false);
+        }
+    };
+
+    async function logoutUser() {
+        await AsyncStorage.removeItem("token");
+        setUser(null);
+        setisAuth(false);
+        setToken(null);
+        Toast.show({ type: "success", text1: "Logged out successfully!" })
+    }
     async function loadUser() {
         setAuthLoading(true);
         try {
@@ -42,7 +131,8 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         } finally {
             setAuthLoading(false);
         }
-    }
+    };
+
 
     useEffect(() => {
         loadUser();
@@ -50,10 +140,11 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
     return (
         < AppContext.Provider
-            value={{ user, isAuth, btnLoading, authLoading, token }
+            value={{ user, isAuth, btnLoading, authLoading, token, loginUser, registerUser, logoutUser }
             }
         >
             {children}
+            <Toast />
         </AppContext.Provider >
     );
 };

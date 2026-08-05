@@ -27,4 +27,21 @@ export interface AppContextType {
     authLoading: boolean;
     btnLoading: boolean;
     token: string | null;
+    registerUser: (
+        name: string,
+        email: string,
+        password: string,
+        setName: any,
+        setEmail: any,
+        setPassword: any,
+        router: any,
+    ) => Promise<void>,
+    loginUser: (
+        email: string,
+        password: string,
+        setEmail: any,
+        setPassword: any,
+        router: any,
+    ) => Promise<void>,
+    logoutUser: () => Promise<void>
 }
