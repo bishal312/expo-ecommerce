@@ -210,8 +210,8 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
                 { headers: { token } }
             );
             await fetchCart();
-        } catch (error) {
-            Toast.show({ type: "error", text1: "Failed to update cart" });
+        } catch (error: any) {
+            Toast.show({ type: "error", text1: error.response.data.message });
         }
     }
 
