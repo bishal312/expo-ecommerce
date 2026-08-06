@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import axios, { AxiosError } from "axios";
 import Toast from "react-native-toast-message"
 
-const server = "http://localhost:5000";
+export const server = "http://localhost:5000";
 
 const defaultContext: AppContextType = {
     user: null,

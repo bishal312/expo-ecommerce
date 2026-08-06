@@ -34,6 +34,9 @@ export default function TabsLayout() {
                         case "checkout":
                             iconName = "checkmark-done-outline";
                             break;
+                        case "payment":
+                            iconName = "cash-outline";
+                            break;
                     }
 
                     return (
@@ -69,6 +72,10 @@ export default function TabsLayout() {
             <Tabs.Screen
                 name="checkout"
                 options={{ title: "Checkout", href: null }}
+            />
+            <Tabs.Screen
+                name="payment"
+                options={{ title: "Payment", href: null }}
             />
         </Tabs>
     );

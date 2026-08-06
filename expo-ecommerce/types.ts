@@ -76,3 +76,9 @@ export interface AppContextType {
     fetchCart: () => Promise<void>;
     quantity: number;
 }
+
+export interface Addresses {
+    _id: string,
+    address: string,
+    phone: string,
+}
