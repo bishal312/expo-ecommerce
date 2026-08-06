@@ -1,13 +1,16 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { useApp } from "../../../context/AppContext";
 
 export default function TabsLayout() {
+    const { quantity } = useApp();
     return (
         <Tabs
             screenOptions={({ route }) => ({
                 headerShown: false,
                 tabBarActiveTintColor: "#000",
                 tabBarInactiveTintColor: "gray",
+                tabBarBadge: route.name === "cart" && quantity > 0 ? quantity : undefined,
                 // tabBarShowLabel: false,
                 tabBarIcon: ({ color, size }) => {
                     let iconName: keyof typeof Ionicons.glyphMap = "home";
@@ -46,7 +49,7 @@ export default function TabsLayout() {
             />
             <Tabs.Screen
                 name="cart"
-                options={{ title: "Cart" }}
+                options={{ title: "Cart", tabBarBadge: quantity > 0 ? quantity : undefined }}
             />
             <Tabs.Screen
                 name="account"

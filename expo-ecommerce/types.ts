@@ -22,6 +22,15 @@ export interface Product {
     createdAt: string;
 }
 
+export interface CartItem {
+    _id: string;
+    quauntity: number;
+    product: Product;
+    user: string;
+
+
+}
+
 export interface AppContextType {
     user: User | null;
     isAuth: boolean;
@@ -57,4 +66,13 @@ export interface AppContextType {
     sortByPrice: string;
     setSortByPrice: (val: string) => void;
     fetchProducts: () => Promise<void>;
+
+    // Cart
+    cart: CartItem[];
+    cartLoading: boolean;
+    addToCart: (productId: string) => Promise<void>;
+    updateCart: (action: "inc" | "dec", cartItemId: string) => Promise<void>;
+    removeFromCart: (cartItemId: string) => Promise<void>;
+    fetchCart: () => Promise<void>;
+    quantity: number;
 }

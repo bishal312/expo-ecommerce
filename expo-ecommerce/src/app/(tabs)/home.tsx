@@ -14,6 +14,7 @@ export default function HomeScreen() {
         categories,
         setSortByPrice,
         sortByPrice,
+        addToCart,
     } = useApp();
 
     return (
@@ -32,7 +33,7 @@ export default function HomeScreen() {
                     //     <Text className="text-gray-500">${item.price}</Text>
                     //   </View>
                     // )
-                    <ProductCard item={item} isAuth={isAuth} />
+                    <ProductCard item={item} isAuth={isAuth} addToCart={addToCart} />
                 }
                 ListHeaderComponent={
                     <View>
@@ -99,6 +100,8 @@ export default function HomeScreen() {
                         </View>
                     </View>
                 }
+                numColumns={2}
+                columnWrapperStyle={{ gap: 12 }}
             />
         </SafeAreaView>
     );
