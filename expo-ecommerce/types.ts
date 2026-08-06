@@ -14,6 +14,7 @@ export interface Product {
     _id: string;
     title: string;
     about: string;
+    price: number;
     stock: number;
     images: ProductImage[];
     sold: number;
@@ -44,4 +45,16 @@ export interface AppContextType {
         router: any,
     ) => Promise<void>,
     logoutUser: () => Promise<void>
+
+    //products
+    products: Product[];
+    productLoading: boolean;
+    search: string;
+    setSearch: (val: string) => void;
+    category: string;
+    categories: string[];
+    setCategory: (val: string) => void;
+    sortByPrice: string;
+    setSortByPrice: (val: string) => void;
+    fetchProducts: () => Promise<void>;
 }

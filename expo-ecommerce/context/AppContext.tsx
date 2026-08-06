@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { AppContextType, User } from "../types";
+import { AppContextType, Product, User } from "../types";
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import axios, { AxiosError } from "axios";
 import Toast from "react-native-toast-message"
@@ -15,6 +15,17 @@ const defaultContext: AppContextType = {
     loginUser: async () => { },
     registerUser: async () => { },
     logoutUser: async () => { },
+    products: [],
+    productLoading: false,
+    search: "",
+    setSearch: () => { },
+    category: "",
+    categories: [],
+    setCategory: () => { },
+    sortByPrice: "",
+    setSortByPrice: () => { },
+    fetchProducts: async () => { },
+
 };
 
 const AppContext = createContext<AppContextType>
@@ -26,6 +37,13 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     const [authLoading, setAuthLoading] = useState(true);
     const [btnLoading, setBtnLoading] = useState(false);
     const [token, setToken] = useState<string | null>(null);
+    const [search, setSearch] = useState("");
+    const [price, setPrice] = useState();
+    const [products, setProducts] = useState<Product[]>([]);
+    const [productLoading, setProductsLoading] = useState(false);
+    const [category, setCategory] = useState("");
+    const [sortByPrice, setSortByPrice] = useState("");
+    const [categories, setcategories] = useState<string[]>([]);
 
     const registerUser = async (
         name: string,
@@ -105,6 +123,26 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         }
     };
 
+    // Fetch Products
+    async function fetchProducts() {
+        setProductsLoading(true);
+        try {
+            const { data } = await axios.get(`${server}/api/product/all`, { params: { search, category, sortByPrice }, });
+
+            setProducts(data.products);
+            setcategories(data.categories || []);
+
+        } catch (error) {
+            Toast.show({ type: "error", text1: "Failed to load Products" });
+        } finally {
+            setProductsLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchProducts();
+    }, [search, category, sortByPrice]);
+
     async function logoutUser() {
         await AsyncStorage.removeItem("token");
         setUser(null);
@@ -134,13 +172,14 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
 
+
     useEffect(() => {
         loadUser();
     }, []);
 
     return (
         < AppContext.Provider
-            value={{ user, isAuth, btnLoading, authLoading, token, loginUser, registerUser, logoutUser }
+            value={{ user, isAuth, btnLoading, authLoading, token, loginUser, registerUser, logoutUser, products, productLoading, categories, category, setCategory, search, setSearch, setSortByPrice, sortByPrice, fetchProducts }
             }
         >
             {children}
