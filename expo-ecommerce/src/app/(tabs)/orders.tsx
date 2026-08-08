@@ -89,7 +89,34 @@ export default function OrdersScreen() {
                     <Text className='text-gray-400 text-xs'>
                       #{item._id.slice(-10).toUpperCase()}
                     </Text>
+                    <Text className={`text-xs font-bold ${s.color}`}>
+                      {s.emoji} {item.status}
+                    </Text>
                   </View>
+
+                  <View className='h-px bg-gray-100 mb-3' />
+
+                  <View className='flex-row justify-between'>
+                    {[
+                      ["items", item.items?.length ?? 0],
+                      ["Total", `$${item.subTotal}`],
+                      ["payment", item.method.toUpperCase()],
+                      ["Date", new Date(item.createdAt).toLocaleDateString("en-NP", {
+                        day: "numeric",
+                        month: "short",
+                      })]
+                    ].map(([label, value]) => (
+                      <View key={label}>
+                        <Text className='text-gray-400 text-xs'>
+                          {label}
+                        </Text>
+                        <Text className='text-gray-900] font-semibold text-sm mt-0.5'>
+                          {value}
+                        </Text>
+                      </View>
+                    ))}
+                  </View>
+                  <Text className='text-sky-500 text-xs font-semibold text-right mt-3'> View Details</Text>
                 </TouchableOpacity>
               )
             }}
