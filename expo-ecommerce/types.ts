@@ -82,3 +82,12 @@ export interface Addresses {
     address: string,
     phone: string,
 }
+
+export interface Order{
+    _id: string;
+    status: "Pending" | "Shippend" | "Delivered";
+    items: any[];
+    subTotal: number;
+    method: string;
+    createdAt: string;
+}
