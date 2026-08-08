@@ -1,0 +1,29 @@
+npm install
+npm install -g eas-cli
+eas login
+eas whoami
+eas build:configure
+
+{
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {}
+  }
+}
+
+eas build --platform android
+eas build --platform android --profile production
+
+// publising to google play
+eas submit --platform android
+eas build --platform android --auto-submit
+
+// iso
+eas build --platform ios
+eas submit --platform ios

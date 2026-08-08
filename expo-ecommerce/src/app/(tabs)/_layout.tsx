@@ -37,6 +37,9 @@ export default function TabsLayout() {
                         case "payment":
                             iconName = "cash-outline";
                             break;
+                        case "orders-success":
+                            iconName = "cube-outline";
+                            break;
                     }
 
                     return (
@@ -76,6 +79,10 @@ export default function TabsLayout() {
             <Tabs.Screen
                 name="payment"
                 options={{ title: "Payment", href: null }}
+            />
+            <Tabs.Screen
+                name="orders-success"
+                options={{ title: "Orders Success", href: null }}
             />
         </Tabs>
     );
