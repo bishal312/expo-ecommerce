@@ -83,11 +83,32 @@ export interface Addresses {
     phone: string,
 }
 
-export interface Order{
+export interface Order {
     _id: string;
-    status: "Pending" | "Shippend" | "Delivered";
+    status: "Pending" | "Shipped" | "Delivered";
     items: any[];
     subTotal: number;
     method: string;
     createdAt: string;
+}
+
+export interface OrderDetail {
+    _id: string;
+    status: "Pending" | "Shipped" | "Delivered";
+    items: {
+        product: {
+            _id: string;
+            title: string;
+            price: number;
+            images: { url: string }[];
+        };
+        quantity: number;
+    }[];
+    subTotal: number;
+    method: string;
+    createdAt: string;
+    paidAt?: string;
+    address: string;
+    phone: string;
+    user: { _id: string; email: string; };
 }
