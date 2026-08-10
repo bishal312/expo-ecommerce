@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useRouter } from 'expo-router';
 import { useApp } from '../../../context/AppContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import AdminProductsComponents from '../../../components/AdminProducts';
 
 type Tab = "products" | "orders" | "stats";
 const TABS: { key: Tab; label: string, emoji: string }[] = [
@@ -33,12 +34,9 @@ export default function AdminScreen() {
       </View>
 
       <View className='flex-1'>
-        {activeTab === "products" && (
-          <View>
-            {" "}
-            <Text>Products</Text>
-          </View>
-        )}
+        {activeTab === "products" && 
+          <AdminProductsComponents />
+        }
         {
           activeTab === "orders"
         }
