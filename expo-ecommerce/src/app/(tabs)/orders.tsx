@@ -43,7 +43,7 @@ export default function OrdersScreen() {
       <SafeAreaView className='flex-1 bg-gray-50'>
         <View className='flex-row items-center px-5 py-4'>
           <TouchableOpacity className='mr-3 bg-white border border-gray-200 w-9 h-9 rounded-xl items-center justify-center shadow-sm' onPress={() => router.push("/account")}>
-            <Text className='text-gray-600 font-bold'>⬅️</Text>
+            <Text className='text-gray-600 text-xl font-bold'>⬅️</Text>
           </TouchableOpacity>
 
           <Text className='text-xl font-bold text-gray-900 flex-1'>
