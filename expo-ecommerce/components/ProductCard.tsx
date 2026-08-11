@@ -21,9 +21,13 @@ export default function ProductCard({ item, isAuth, addToCart }: any) {
                 <Text className='font-bold text-orange-500 mt-1'>
                     ${item.price}
                 </Text>
-                <TouchableOpacity disabled={!isAuth} className={`mt-3 py-3 rounded-xl ${isAuth ? "bg-sky-500" : "bg-sky-100"}`} onPress={() => addToCart(item._id)}>
+                {item.stock === 0 ? (
+                    <View className='mt-3'>
+                        <Text className='text-red-400'>Out of Stock</Text>
+                    </View>
+                ) : <TouchableOpacity disabled={!isAuth} className={`mt-3 py-3 rounded-xl ${isAuth ? "bg-sky-500" : "bg-sky-100"}`} onPress={() => addToCart(item._id)}>
                     <Text className={`text-center text-xs font-semibold ${isAuth ? "text-white" : "text-gray-400"}`}>{isAuth ? "Add To Cart" : "Login Required"}</Text>
-                </TouchableOpacity>
+                </TouchableOpacity>}
             </View>
         </View>
     )

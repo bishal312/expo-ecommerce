@@ -184,17 +184,22 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
             Toast.show({ type: "error", text1: "Login Required" });
             return;
         }
-        await axios.post(`${server}/api/cart/add`, {
-            product: productId,
-        }, {
-            headers:
-            {
-                token,
-            },
-        });
+        try {
+            await axios.post(`${server}/api/cart/add`, {
+                product: productId,
+            }, {
+                headers:
+                {
+                    token,
+                },
+            });
 
-        Toast.show({ type: "success", text1: "Added to cart" });
-        await fetchCart();
+            Toast.show({ type: "success", text1: "Added to cart" });
+            await fetchCart();
+        } catch (error:any) {
+
+            Toast.show({type:"error", text1: error.response?.data?.message})
+        }
 
     }
 

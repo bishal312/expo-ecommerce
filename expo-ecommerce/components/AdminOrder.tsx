@@ -122,7 +122,6 @@ export default function AdminOrder() {
             <View className='items-center py-16'>
               <Text className='text-4xl mb-2'>📦</Text>
               <Text className='text-gray-400'>No orders found</Text>
-
             </View>
           }
             renderItem={({ item }) => {
