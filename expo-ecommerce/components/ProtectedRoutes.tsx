@@ -1,4 +1,3 @@
-import { Redirect } from "expo-router";
 import React, { ReactNode } from "react";
 
 type Props = {
@@ -7,9 +6,5 @@ type Props = {
 };
 
 export default function ProtectedRoutes({ isLoggedIn, children }: Props) {
-    if (!isLoggedIn) {
-        return <Redirect href={'/login'} />
-    }
-
     return <>{children}</>
 }
