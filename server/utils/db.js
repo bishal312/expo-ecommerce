@@ -1,21 +1,23 @@
 import mongoose from "mongoose";
 
-let isConnected = false;
-
 const connectDb = async () => {
-
-  if (isConnected) {
+  // Check if mongoose is already connected (1 = connected, 2 = connecting)
+  if (mongoose.connection.readyState >= 1) {
     return;
   }
+
   try {
+    if (!process.env.MONGO_URL) {
+      throw new Error("MONGO_URL is not defined in environment variables");
+    }
+
     const db = await mongoose.connect(process.env.MONGO_URL, {
       dbName: "expo-ecommerce",
     });
 
-    isConnected = db.connection[0].readyState === 1;
-    console.log("Mongo Db connected");
+    console.log(`MongoDB Connected: ${db.connection.host}`);
   } catch (error) {
-    console.log(error);
+    console.error("MongoDB Connection Error:", error.message);
     throw error;
   }
 };

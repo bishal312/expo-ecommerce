@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import axios, { AxiosError } from "axios";
 import Toast from "react-native-toast-message"
 
-export const server = "https://expo-ecommerce-kappa.vercel.app/";
+export const server = "https://expo-ecommerce-kappa.vercel.app";
 
 const defaultContext: AppContextType = {
     user: null,
